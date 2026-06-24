@@ -9,10 +9,11 @@ void main_menu(TaskManager& manager){
         int choice;
         
         std::cout << "Список действий: \n\n";
-        std::cout << "1. Добавить задачу \n2. Удалить задачу \n3. Вывести список активных задач \n4. пометить задачу выполненной (Это действие удалит задачу автоматически) \n5. Найти задачу по тегу \n0. Выйти";
+        std::cout << "1. Добавить задачу \n2. Удалить задачу \n3. Вывести список активных задач \n4. Пометить задачу выполненной (Это действие удалит задачу автоматически) \n5. Найти задачу по тегу \n0. Выйти\n\n";
 
         std::cout << "Что вы хотите сделать (1-5)? ";
         std::cin >> choice;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         switch(choice){
             case 0:
@@ -22,27 +23,22 @@ void main_menu(TaskManager& manager){
             case 1:
                 clear_screen();
                 handle_add_task(manager);
-                wait_for_user();
                 break;
             case 2:
                 clear_screen();
                 handle_delete_task(manager);
-                wait_for_user();
                 break;
             case 3:
                 clear_screen();
                 manager.print_all_tasks();
-                wait_for_user();
                 break;
             case 4:
                 clear_screen();
                 handle_complete_task(manager);
-                wait_for_user();
                 break;
             case 5:
                 clear_screen();
                 find_task_by_tag(manager);
-                wait_for_user();
                 break;
             default:
                 clear_screen();
@@ -62,14 +58,16 @@ int get_id(){
 
 void handle_delete_task(TaskManager& manager){
     manager.delete_task(get_id());
+    wait_for_user();
 }
 
 void handle_complete_task(TaskManager& manager){
     manager.complete_task(get_id());
+    wait_for_user();
 }
 
 void handle_add_task(TaskManager& manager){
-    std::cin >> std::ws;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     
     std::cout << "Введите название задачи: ";
     std::string name;
@@ -108,13 +106,13 @@ priority_mistake: //переносится сюда из блока default, е�
             break;
         default:
             std::cout << "Введено неверное число. Попробуйте ещё раз. \n\n";
-            std::cin >> std::ws;
             goto priority_mistake;
     }
     std::cout << "\n\n";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 
 tags_mistake: //переносится сюда из блока else if, если юзер неправильно написал слова да/нет 
-    std::cin >> std::ws;
     std::cout << "Вы хотите добавить теги для этой задачи (да/нет)? ";
     std::string tags_choice;
     std::vector<std::string> local_tags;
@@ -130,16 +128,19 @@ tags_mistake: //переносится сюда из блока else if, есл�
     }
     else if(tags_choice != "Да" && tags_choice != "да" && tags_choice != "Нет" && tags_choice != "нет"){
         std::cout << "Введён некорекктный ответ. Попробуйте ещё раз. \n\n";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         goto tags_mistake;
     }
     std::cout << "\n\n";
 
     std::cout << "Новая задача успешно создана! Удачи с выполнением! \n";
     manager.add_task(name, description, deadline, level, local_tags);
+
+    wait_for_user();
 }
 
 void find_task_by_tag(TaskManager& manager){
-    std::cin >> std::ws;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Введите тег для поиска: ";
     std::string tag;
     std::getline(std::cin, tag);

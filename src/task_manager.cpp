@@ -24,6 +24,7 @@ void TaskManager::add_task(const std::string& name, const std::string& descripti
 void TaskManager::print_all_tasks(){
     if(tasks.empty()) {
         std::cout << "У вас нет созданных задач!\n";
+        wait_for_user();
         return;
     }
     
@@ -43,7 +44,7 @@ void TaskManager::print_all_tasks(){
                 std::cout << "Приоритет: Высокий\n";
                 break;
         }
-        std::cout << "Выполнить до: " << std::format("%Y-%m-%d", task.deadline) << "\n";
+        std::cout << "Выполнить до: " << std::format("{:%Y-%m-%d}", task.deadline) << "\n";
         std::cout << "\nТеги: ";
         if(task.tags.empty()) std::cout << "У этой задачи нет тегов";
         else{
@@ -54,6 +55,7 @@ void TaskManager::print_all_tasks(){
         std::cout << "\n";
         std::cout << "================================================\n\n";
     }
+    wait_for_user();
 }
 
 void TaskManager::complete_task(int id){
@@ -80,13 +82,14 @@ void TaskManager::find_by_tag(const std::string& tag){
             std::cout << "ID задачи: " << task.id << "\n";
             std::cout << "Название задачи: " << task.name << "\n";
             std::cout << "Описание задачи: " << task.description << "\n";
-            std::cout << "Выполнить до: " << std::format("%Y-%m-%d", task.deadline) << "\n";
+            std::cout << "Выполнить до: " << std::format("{:%Y-%m-%d}", task.deadline) << "\n";
             std::cout << "================================================\n\n";
             found = true;
         }
      
     }
     if(found == false) std::cout << "Задач с таким тегом не найдено. \n";
+    wait_for_user();
 }
 
 void TaskManager::save_tasks(){
