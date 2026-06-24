@@ -43,7 +43,7 @@ void TaskManager::print_all_tasks(){
                 std::cout << "Приоритет: Высокий\n";
                 break;
         }
-        std::cout << "Выполнить до: " << std::chrono::format("%Y-%m-%d", task.deadline) << "\n";
+        std::cout << "Выполнить до: " << std::format("%Y-%m-%d", task.deadline) << "\n";
         std::cout << "\nТеги: ";
         if(task.tags.empty()) std::cout << "У этой задачи нет тегов";
         else{
@@ -80,7 +80,7 @@ void TaskManager::find_by_tag(const std::string& tag){
             std::cout << "ID задачи: " << task.id << "\n";
             std::cout << "Название задачи: " << task.name << "\n";
             std::cout << "Описание задачи: " << task.description << "\n";
-            std::cout << "Выполнить до: " << std::chrono::format("%Y-%m-%d", task.deadline) << "\n";
+            std::cout << "Выполнить до: " << std::format("%Y-%m-%d", task.deadline) << "\n";
             std::cout << "================================================\n\n";
             found = true;
         }

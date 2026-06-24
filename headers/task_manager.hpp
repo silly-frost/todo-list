@@ -9,7 +9,8 @@ class TaskManager {
         int next_id;
 
     public:
-        void add_task(const std::string& name, const std::string& description, std::chrono::system_clock::time_point deadline, Priority level);
+        TaskManager();
+        void add_task(const std::string& name, const std::string& description, std::chrono::system_clock::time_point deadline, Priority level, const std::vector<std::string> tags);
         void print_all_tasks();
         void complete_task(int id);
         void delete_task(int id);

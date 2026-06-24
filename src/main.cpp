@@ -7,4 +7,4 @@ int main(){
     TaskCLI::main_menu(manager);
     manager.save_tasks();
     return 0;
-}:
+}
