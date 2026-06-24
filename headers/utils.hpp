@@ -1,11 +1,7 @@
 #pragma once 
 
 #include<cstdlib>
+#include<limits>
 
-inline void clear_screen() {
-#ifdef _WIN32
-    std::system("cls");
-#else
-    std::system("clear");
-#endif
-}
+void clear_screen();
+void wait_for_user();
