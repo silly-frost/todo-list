@@ -1,0 +1,16 @@
+/build/
+
+todo-list
+todo-list.exe
+
+tasks.txt
+
+*.o
+*.obj
+*.exe
+*.a
+*.lib
+.DS_Store
+Thumbs.db
+
+
