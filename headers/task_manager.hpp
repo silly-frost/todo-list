@@ -1,7 +1,7 @@
 #pragma once
 
 #include"task.hpp"
-
+#include<fstream>
 
 class TaskManager {
     private:
@@ -13,4 +13,7 @@ class TaskManager {
         void print_all_tasks();
         void complete_task(int id);
         void delete_task(int id);
+        void find_by_tag(const std::string& tag);
+        void save_tasks();
+        void load_tasks();
 };
